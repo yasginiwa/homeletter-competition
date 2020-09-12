@@ -1,0 +1,60 @@
+/* pages/letter/letter.wxss */
+page {
+  display: flex;
+  background-color: #ecf0f1;
+  flex-direction: column;
+  align-items: center;
+}
+
+.banner {
+  width: 94%;
+  box-shadow: 0 0 14rpx #bdc3c7;
+  background-color: #ffffff;
+}
+
+.banner image {
+  width: 100%;
+}
+
+.banner .desc {
+  background-color: #fefefe;
+  font-size: 24rpx;
+}
+
+.banner .desc text {
+  display: block;
+  padding: 16rpx;
+}
+
+.main {
+  width: 100%;
+  margin-top: 20rpx;
+  background-color: #fff;
+}
+
+.main .tabs {
+  height: 100%;
+}
+
+.text-area {
+  min-height: 200px !important;
+  border: 1rpx solid #ddd !important;
+  margin-top: 15rpx !important;
+  border-radius: 10rpx !important;
+  padding: 10rpx !important;
+}
+
+.main .submit-section {
+  display: flex;
+  justify-content: center;
+  padding: 20rpx;
+}
+
+.submit-section button {
+  background-color: #f5d317;
+  color: #fff;
+}
+
+
+
+

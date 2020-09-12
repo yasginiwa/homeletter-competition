@@ -1,0 +1,24 @@
+{
+  "name": "WWW-TianXi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "date-format": "^3.0.0",
+    "https": "^1.0.0",
+    "install": "^0.13.0",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^8.0.6",
+    "mysql": "^2.18.1",
+    "npm": "^6.13.7",
+    "querystring": "^0.2.0",
+    "request": "^2.88.0"
+  }
+}
