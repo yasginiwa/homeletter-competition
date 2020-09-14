@@ -99,6 +99,58 @@ router.post('addletter', async(ctx, next) => {
     next()
 })
 
+//  后台管理登录
+router.post('login', async(ctx, next) => {
+    const { username, password } = ctx.request.body
+
+    const pwdResult = await db.query(`select password from t_user where username = '${username}'`)
+
+    //  查询到的用户数为0 代表无此用户
+    if (pwdResult.length === 0) {
+
+        ctx.response.body = {
+            meta: {
+                status: 401,
+                msg: '用户名不存在'
+            }
+        }
+        return
+    } 
+
+    if (pwdResult[0].password !== password) {
+
+        ctx.response.body = {
+            meta: {
+                status: 402,
+                msg: '用户名或密码错误'
+            }
+        }
+    } else  {
+
+        ctx.response.body = {
+            meta: {
+                status: 200,
+                msg: '登录成功'
+            }
+        }
+    }
+
+    next()
+
+})
+
+//  后台查询信件详情
+router.get('getletters', async(ctx, next) => {
+    
+    const { pagenum, pagesize, query } = ctx.query
+
+    console.log(pagenum, pagesize, query)
+    
+    if (query !== '') {
+        db.query(`select * from t_letter where `)
+    }
+})
+
 
 // //  查询是否存在用户
 // router.get('queryuser', async (ctx, next) => {
