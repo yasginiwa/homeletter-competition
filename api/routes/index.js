@@ -82,9 +82,9 @@ router.get('letter', async (ctx, next) => {
 //  提交一封家书
 router.post('addletter', async(ctx, next) => {
     
-    const { openid, name, gender, school, classid, mobile, content } =  ctx.request.body
+    const { openid, name, gender, mobile, content } =  ctx.request.body
 
-    const res = await db.query(`insert into t_letter values (default, '${openid}', '${name}', '${gender}', '${school}', '${classid}', '${mobile}', '${content}', default)`)
+    const res = await db.query(`insert into t_letter values (default, '${openid}', '${name}', '${gender}', '${mobile}', '${content}', default)`)
 
     ctx.response.body = {
         meta: {

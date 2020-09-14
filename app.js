@@ -51,10 +51,10 @@ App({
             if(result.data.data.result.length) {
 
               let indexPage = getCurrentPages()[0]
-              const { openid, name, gender, school, classid, mobile, content } = result.data.data.result[0]
+              const { openid, name, gender, mobile, content } = result.data.data.result[0]
 
               indexPage.setData({
-                letter: { openid, name, gender, school, classid, mobile, content },
+                letter: { openid, name, gender, mobile, content },
                 tabActive: 1,
                 tabIndex: 1,
                 isSubmited: true

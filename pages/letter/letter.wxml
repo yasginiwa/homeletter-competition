@@ -3,8 +3,8 @@
 	<image src="../../assets/img/banner.png" mode="widthFix"></image>
 	<view class="desc">
 		<text>● 征文主题：感恩</text>
-		<text>● 作文标题：@_______，谢谢你！</text>
-		<text>● 作文体裁：书信300字左右，500字以内。</text>
+		<text>● 征文标题：@_______，谢谢你！</text>
+		<text>● 征文字数：书信300字左右，500字以内。</text>
 		<text>● 征文截止时间：9月20日晚24:00。</text>
 		<text>● 征文要求：家书体现美好主题，稿件需为原创首发，严谨抄袭、编造、虚构，文责自负。来稿不退，请自行留底稿。</text>
 		<text>● 征文评奖：征文经评选获奖后，主办单位电话联系获奖者，发放奖品。</text>
@@ -21,12 +21,10 @@
 		</van-tabs>
 		<form wx:if="{{ tabIndex === 0 }}" bindsubmit="submit">
 
-			<van-field required clearable label="学生姓名" name="name" value="{{ letter.name }}" placeholder="请输入学生姓名" border="{{ true }}" disabled="{{ isSubmited }}" />
+			<van-field required clearable label="投稿人姓名" name="name" value="{{ letter.name }}" placeholder="请输入投稿人姓名" border="{{ true }}" disabled="{{ isSubmited }}" />
 			<van-field required label="性别" name="gender" value="{{ letter.gender }}" placeholder="请选择性别" border="{{ true }}" bindtap="handleGenderSelection" readonly disabled="{{ isSubmited }}"/>
-			<van-field required clearable label="学校" name="school" value="{{ letter.school }}" placeholder="请输入学校全称" border="{{ true }}" disabled="{{ isSubmited }}" />
-			<van-field required clearable label="班级" name="classid" value="{{ letter.classid }}" placeholder="请输入在读班级" border="{{ true }}" disabled="{{ isSubmited }}" />
-			<van-field required clearable label="家长手机" name="mobile" type="digit" value="{{ letter.mobile }}" placeholder="请输入家长手机" border="{{ true }}" disabled="{{ isSubmited }}" />
-			<van-field required type="textarea" autosize input-class="text-area" label="家书正文" name="content" value="{{ letter.content }}" placeholder="家书正文" border="{{ true }}" disabled="{{ isSubmited }}" />
+			<van-field required clearable label="联系电话" name="mobile" type="digit" value="{{ letter.mobile }}" placeholder="请输入联系" border="{{ true }}" disabled="{{ isSubmited }}" />
+			<van-field required type="textarea" autosize input-class="text-area" label="家书正文" name="content" placeholder="家书正文" border="{{ true }}" disabled="{{ isSubmited }}" />
 
 			<view class="submit-section">
 				<button form-type="submit" disabled="{{ isSubmited }}" >提 交</button>
@@ -34,17 +32,14 @@
 		</form>
 
 		<van-popup show="{{ popupShow }}" position="bottom">
-			<van-picker show-toolbar title="性别" columns="{{ genderOpt }}" bind:cancel="handleGenderCancel" bind:confirm="handleGenderConfirm" />
+			<van-picker show-toolbar title="性别" columns="{{ genderOpt }}" bind:cancel="handleGenderCancel" wx:key="{{index}}" bind:confirm="handleGenderConfirm" />
 		</van-popup>
 
-
 		<form wx:if="{{ tabIndex === 1 }}">
-			<van-field required disabled label="学生姓名" value="{{ letter.name }}" placeholder="请输入学生姓名" border="{{ true }}" />
-			<van-field required disabled label="性别" value="{{ letter.gender }}" border="{{ true }}" bind:change="onChange" />
-			<van-field required disabled label="学校" value="{{ letter.school }}" placeholder="请输入学校全称" border="{{ true }}" />
-			<van-field required disabled label="班级" value="{{ letter.classid }}" placeholder="请输入在读班级" border="{{ true }}" />
-			<van-field required disabled label="家长手机" value="{{ letter.mobile }}" placeholder="请输入家长手机" border="{{ true }}" />
-			<van-field required disabled type="textarea" autosize input-class="text-area" label="家书正文" value="{{ letter.content }}" placeholder="家书正文" border="{{ true }}" />
+			<van-field required disabled label="投稿人姓名" value="{{ letter.name }}" placeholder="暂无" border="{{ true }}" />
+			<van-field required disabled label="性别" value="{{ letter.gender }}" placeholder="暂无" border="{{ true }}" bind:change="onChange" />
+			<van-field required disabled label="联系电话" value="{{ letter.mobile }}" placeholder="暂无" border="{{ true }}" />
+			<van-field required disabled type="textarea" autosize input-class="text-area" label="家书正文" value="{{ letter.content }}" placeholder="暂无" border="{{ true }}" />
 		</form>
 	</view>
 </view>

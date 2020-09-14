@@ -12,8 +12,6 @@ Page({
       openid: '',
       name: '',
       gender: '',
-      school: '',
-      classid: '',
       mobile: '',
       content: ''
     },
@@ -62,18 +60,6 @@ Page({
       return false
     }
 
-    //  验证学校
-    if (values.school.length < 1) {
-      Toast.fail('学校不能为空')
-      return false
-    }
-
-    //  验证班级
-    if (values.classid.length < 1) {
-      Toast.fail('班级不能为空')
-      return false
-    }
-
     //  验证手机号
     const mobileReg = /^1[3456789]\d{9}$/
     if (!mobileReg.test(values.mobile)) {
@@ -83,7 +69,7 @@ Page({
 
     //  验证正文内容
     if (values.content.length < 20) {
-      Toast.fail('正文内容应不小于20个字')
+      Toast.fail('正文内容应不少于20个字')
       return false
     }
     
@@ -101,6 +87,7 @@ Page({
 
       wx.showLoading({
         title: '提交中',
+        mask: true
       })
 
       wx.request({
@@ -110,8 +97,6 @@ Page({
           'openid': values.openid,
           'name': values.name,
           'gender': values.gender,
-          'school': values.school,
-          'classid': values.classid,
           'mobile': values.mobile,
           'content': values.content
         },
