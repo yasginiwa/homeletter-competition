@@ -24,7 +24,7 @@
 			<van-field required clearable label="投稿人姓名" name="name" value="{{ letter.name }}" placeholder="请输入投稿人姓名" border="{{ true }}" disabled="{{ isSubmited }}" />
 			<van-field required label="性别" name="gender" value="{{ letter.gender }}" placeholder="请选择性别" border="{{ true }}" bindtap="handleGenderSelection" readonly disabled="{{ isSubmited }}"/>
 			<van-field required clearable label="联系电话" name="mobile" type="digit" value="{{ letter.mobile }}" placeholder="请输入联系" border="{{ true }}" disabled="{{ isSubmited }}" />
-			<van-field required type="textarea" autosize input-class="text-area" label="家书正文" name="content" placeholder="家书正文" border="{{ true }}" disabled="{{ isSubmited }}" />
+			<van-field required type="textarea" autosize input-class="text-area" label="家书正文" value="{{ letter.content }}" name="content" placeholder="家书正文" border="{{ true }}" disabled="{{ isSubmited }}" />
 
 			<view class="submit-section">
 				<button form-type="submit" disabled="{{ isSubmited }}" >提 交</button>
