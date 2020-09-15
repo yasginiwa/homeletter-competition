@@ -50,7 +50,7 @@ router.post('openid', async (ctx, next) => {
                     meta: {
                         status: 401,
                         msg: 'error',
-                    },                    
+                    },
                     data: err
                 }
             }
@@ -61,9 +61,9 @@ router.post('openid', async (ctx, next) => {
 
 //  查询此openid用户是否有写过一封家书
 router.get('letter', async (ctx, next) => {
-    
+
     const openid = ctx.query.openid
-    
+
     const res = await db.query(`select * from t_letter where openid='${openid}'`)
 
     ctx.response.body = {
@@ -80,9 +80,9 @@ router.get('letter', async (ctx, next) => {
 })
 
 //  提交一封家书
-router.post('addletter', async(ctx, next) => {
-    
-    const { openid, name, gender, mobile, content } =  ctx.request.body
+router.post('addletter', async (ctx, next) => {
+
+    const { openid, name, gender, mobile, content } = ctx.request.body
 
     const res = await db.query(`insert into t_letter values (default, '${openid}', '${name}', '${gender}', '${mobile}', '${content}', default)`)
 
@@ -100,7 +100,7 @@ router.post('addletter', async(ctx, next) => {
 })
 
 //  后台管理登录
-router.post('login', async(ctx, next) => {
+router.post('login', async (ctx, next) => {
     const { username, password } = ctx.request.body
 
     const pwdResult = await db.query(`select password from t_user where username = '${username}'`)
@@ -115,7 +115,7 @@ router.post('login', async(ctx, next) => {
             }
         }
         return
-    } 
+    }
 
     if (pwdResult[0].password !== password) {
 
@@ -125,7 +125,7 @@ router.post('login', async(ctx, next) => {
                 msg: '用户名或密码错误'
             }
         }
-    } else  {
+    } else {
 
         ctx.response.body = {
             meta: {
@@ -140,15 +140,44 @@ router.post('login', async(ctx, next) => {
 })
 
 //  后台查询信件详情
-router.get('getletters', async(ctx, next) => {
-    
-    const { pagenum, pagesize, query } = ctx.query
+router.get('getletters', async (ctx, next) => {
 
-    console.log(pagenum, pagesize, query)
-    
-    if (query !== '') {
-        db.query(`select * from t_letter where `)
+    const { pagenum, pagesize } = ctx.query
+
+    if (!pagenum || pagenum <= 0) {
+        ctx.response.body = {
+            meta: {
+                status: 400,
+                msg: '参数错误'
+            }
+        }
     }
+
+    if (!pagesize || pagesize <= 0) {
+        ctx.response.body = {
+            meta: {
+                status: 400,
+                msg: '参数错误'
+            }
+        }
+    }
+
+    const total = await db.query(`select count(*) from t_letter`)
+
+    const startFrom = (pagenum - 1) * pagesize
+
+    const res = await db.query(`select * from t_letter limit ${startFrom}, ${pagesize}`)
+
+    ctx.response.body = {
+        meta: {
+            status: 200,
+            msg: '获取信件信息成功'
+        },
+        data: { result: res }
+    }
+
+    next()
+
 })
 
 
@@ -291,7 +320,7 @@ router.get('getletters', async(ctx, next) => {
 
 // //  获取中奖记录通知
 // router.get('getwinners', async(ctx, next) => {
-    
+
 //     let res = await db._operation(`select u.nickname, t.productname from t_record r
 //                                     left join t_user u 
 //                                     on r.uid = u.uid
@@ -315,9 +344,9 @@ router.get('getletters', async(ctx, next) => {
 //     let openid = ctx.request.query.openid
 
 //     let userResults = await db._operation(`select uid from t_user where openid = '${openid}'`)
-    
+
 //     let uid = userResults[0].uid
- 
+
 //     let res = await db._operation(`select t.productname, t.price, r.ticketcode, r.ticketno from t_record r
 //                                     left join t_ticket t
 //                                     on r.tid = t.tid
