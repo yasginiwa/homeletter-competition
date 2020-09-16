@@ -142,7 +142,12 @@ router.post('login', async (ctx, next) => {
 //  后台查询信件详情
 router.get('getletters', async (ctx, next) => {
 
-    const { pagenum, pagesize } = ctx.query
+
+    let { pagenum, pagesize} = ctx.query
+    
+    //  参数转换为整数
+    pagenum = pagenum - 0
+    pagesize = pagesize - 0
 
     if (!pagenum || pagenum <= 0) {
         ctx.response.body = {
@@ -162,7 +167,8 @@ router.get('getletters', async (ctx, next) => {
         }
     }
 
-    const total = await db.query(`select count(*) from t_letter`)
+    const total = await db.query(`select count(*) as count from t_letter`)
+    console.log(total)
 
     const startFrom = (pagenum - 1) * pagesize
 
@@ -173,7 +179,7 @@ router.get('getletters', async (ctx, next) => {
             status: 200,
             msg: '获取信件信息成功'
         },
-        data: { result: res }
+        data: { result: res, total: total[0].count }
     }
 
     next()
