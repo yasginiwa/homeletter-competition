@@ -4,7 +4,7 @@ const routes = require('./routes/index')
 const bodyParser = require('koa-bodyparser')
 const https = require('https')
 const fs = require('fs')
-const cors = require('@koa/cors')
+const cors = require('koa2-cors');
 
 //  https密钥配置选项
 let options = {
